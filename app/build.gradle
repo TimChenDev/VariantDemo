@@ -25,10 +25,14 @@ android {
     flavorDimensions "owner"
     productFlavors{
         asus{
+            applicationId "com.variantdemo.asus"
             dimension "owner"
+            buildConfigField "boolean", "SHOW_BANNER", "true"
         }
         acer{
+            applicationId "com.variantdemo.acer"
             dimension "owner"
+            buildConfigField "boolean", "SHOW_BANNER", "false"
         }
     }
 }
