@@ -21,20 +21,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    flavorDimensions "owner"
+    // 越前面的 dimension 權力越大, 會覆蓋掉後面的 dimension
+    // 此例的 Channel 如果跟 Company 有相同的設定會蓋掉 Company 的值
+    flavorDimensions "Channel", "Company"
     productFlavors{
-        asus{
-            applicationId "com.variantdemo.asus"
-            dimension "owner"
-            buildConfigField "boolean", "SHOW_BANNER", "true"
+        momo{ // 上架在 momo
+            applicationIdSuffix ".momo"
+            dimension "Company"
+            buildConfigField "String", "FROM_WHO", "\"momo\""
         }
-        acer{
-            applicationId "com.variantdemo.acer"
-            dimension "owner"
-            buildConfigField "boolean", "SHOW_BANNER", "false"
+        pchome{ // 上架在 pchome
+            applicationIdSuffix ".pchome"
+            dimension "Company"
+            buildConfigField "String", "FROM_WHO", "\"pchome\""
+        }
+        warehouse{ // 從總倉出貨
+            applicationIdSuffix ".warehouse"
+            dimension "Channel"
+            // 從總倉出貨不需要額外設定寄件人, 直接套用電商平台的寄件人
+        }
+        store { // 商家自行出貨
+            applicationIdSuffix ".store"
+            dimension "Channel"
+            // 商家自行出貨, 就要改寫寄件人名稱, 覆蓋過公司原本的設定
+            buildConfigField "String", "FROM_WHO", "\"科科3C賣場\""
         }
     }
+
 }
 
 dependencies {

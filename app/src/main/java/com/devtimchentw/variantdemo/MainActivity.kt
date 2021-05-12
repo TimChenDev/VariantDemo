@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val showBanner = "showBanner is ${BuildConfig.SHOW_BANNER}"
+        val showBanner = "showBanner is ${BuildConfig.FROM_WHO}"
 
         tv_message.text = showBanner
     }
